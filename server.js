@@ -4,6 +4,7 @@ const fashionProductRoutes = require("./routes/fashionProductRoutes");
 const PORT = process.env.PORT || 3000;
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+const swaggerSpecs = require("./config/swaggerSpecs");
 const app = express();
 
 const YAML = require("yamljs");
@@ -27,8 +28,8 @@ app.use(LoggerMiddleware);
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ extended: false }));
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 // Appel pour établir la connexion à la base de données
 connectDB();
 

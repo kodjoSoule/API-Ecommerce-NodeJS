@@ -16,7 +16,9 @@ router.get(
 	"/category/:category",
 	fashionProductQueryController.getProductsByCategory
 );
+
 router.get("/brand/:brand", fashionProductQueryController.getProductsByBrand);
+
 router.get("/onSale", fashionProductQueryController.getProductsOnSale);
 
 // Routes d'interrogation analytiques
