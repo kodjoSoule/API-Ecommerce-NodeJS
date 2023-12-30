@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: 1.0.0
   title: Projet 1 NoSQL MongoDB par Souleymane KODJO
-  description: Application de gestion de produits de mode avec NodeJS et MongoDB developpée
+  description: Application de gestion de produits de mode avec NodeJS et MongoDB
 host: localhost:3000
 basePath: /
 schemes:
@@ -10,8 +10,8 @@ schemes:
 paths:
   /products:
     get:
-      summary: Récupérer la liste des produits de mode
-      description: Récupérer la liste des produits de mode
+      summary: Récupérer la liste de tous les produits de mode
+      description: Récupère la liste complète de tous les produits de mode dans la base de données.
       responses:
         200:
           description: Une liste de produits de mode
@@ -19,6 +19,167 @@ paths:
             type: array
             items:
               $ref: '#/definitions/FashionProduct'
+    post:
+      summary: Ajouter un nouveau produit de mode
+      description: Ajoute un nouveau produit de mode à la base de données.
+      parameters:
+        - name: fashionProduct
+          in: body
+          description: Les détails du nouveau produit de mode
+          required: true
+          schema:
+            $ref: '#/definitions/FashionProduct'
+      responses:
+        200:
+          description: Le produit de mode ajouté avec succès
+          schema:
+            $ref: '#/definitions/FashionProduct'
+
+  /products/{id}:
+    get:
+      summary: Récupérer un produit de mode par ID
+      description: Récupère les détails d'un produit de mode spécifié par son ID.
+      parameters:
+        - name: id
+          in: path
+          description: L'ID du produit de mode
+          required: true
+          type: string
+      responses:
+        200:
+          description: Les détails du produit de mode demandé
+          schema:
+            $ref: '#/definitions/FashionProduct'
+        404:
+          description: Aucun produit de mode trouvé avec l'ID spécifié
+
+  /products/category/{category}:
+    get:
+      summary: Récupérer les produits d'une catégorie spécifique
+      description: Récupère les produits de mode appartenant à une catégorie spécifique.
+      parameters:
+        - name: category
+          in: path
+          description: La catégorie des produits de mode à récupérer
+          required: true
+          type: string
+      responses:
+        200:
+          description: Une liste de produits de mode de la catégorie spécifiée
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FashionProduct'
+        404:
+          description: Aucun produit de mode trouvé pour la catégorie spécifiée
+
+  /products/brand/{brand}:
+    get:
+      summary: Récupérer les produits d'une marque spécifique
+      description: Récupère les produits de mode d'une marque spécifique.
+      parameters:
+        - name: brand
+          in: path
+          description: La marque des produits de mode à récupérer
+          required: true
+          type: string
+      responses:
+        200:
+          description: Une liste de produits de mode de la marque spécifiée
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FashionProduct'
+        404:
+          description: Aucun produit de mode trouvé pour la marque spécifiée
+
+  /products/onSale:
+    get:
+      summary: Récupérer les produits en promotion
+      description: Récupère les produits de mode actuellement en promotion.
+      responses:
+        200:
+          description: Une liste de produits de mode en promotion
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FashionProduct'
+
+  /products/category/{category}/averageRating:
+    get:
+      summary: Calculer la moyenne des évaluations pour une catégorie donnée
+      description: Calcule et renvoie la moyenne des évaluations des produits de mode de la catégorie spécifiée.
+      parameters:
+        - name: category
+          in: path
+          description: La catégorie des produits de mode pour calculer la moyenne des évaluations
+          required: true
+          type: string
+      responses:
+        200:
+          description: La moyenne des évaluations pour la catégorie spécifiée
+          schema:
+            type: object
+            properties:
+              averageRating:
+                type: number
+                format: float
+
+  /products/bestRated:
+    get:
+      summary: Récupérer les produits avec la meilleure évaluation
+      description: Renvoie les produits de mode avec la meilleure évaluation globale.
+      responses:
+        200:
+          description: Une liste des produits de mode avec la meilleure évaluation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FashionProduct'
+
+  /products/count:
+    get:
+      summary: Récupérer le nombre total de produits
+      description: Récupère le nombre total de produits de mode enregistrés dans la base de données.
+      responses:
+        200:
+          description: Le nombre total de produits de mode enregistrés
+          schema:
+            type: object
+            properties:
+              count:
+                type: integer
+
+  /products/sortedByDiscount:
+    get:
+      summary: Récupérer les produits triés par ordre de réduction
+      description: Renvoie les produits de mode triés par pourcentage de réduction décroissant.
+      responses:
+        200:
+          description: Une liste de produits de mode triés par ordre de réduction
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FashionProduct'
+
+  /products/discountGreaterThan/{percentage}:
+    get:
+      summary: Récupérer les produits avec une réduction supérieure à un certain pourcentage
+      description: Renvoie les produits de mode avec une réduction supérieure à un pourcentage spécifié.
+      parameters:
+        - name: percentage
+          in: path
+          description: Le pourcentage de réduction spécifié
+          required: true
+          type: number
+      responses:
+        200:
+          description: Une liste de produits de mode avec une réduction supérieure au pourcentage spécifié
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FashionProduct'
+
 definitions:
   FashionProduct:
     type: object
@@ -87,3 +248,4 @@ definitions:
         type: string
       color:
         type: string
+
