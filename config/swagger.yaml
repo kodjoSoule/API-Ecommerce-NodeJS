@@ -1,0 +1,89 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Projet 1 NoSQL MongoDB par Souleymane KODJO
+  description: Application de gestion de produits de mode avec NodeJS et MongoDB developpée
+host: localhost:3000
+basePath: /
+schemes:
+  - http
+paths:
+  /products:
+    get:
+      summary: Récupérer la liste des produits de mode
+      description: Récupérer la liste des produits de mode
+      responses:
+        200:
+          description: Une liste de produits de mode
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FashionProduct'
+definitions:
+  FashionProduct:
+    type: object
+    properties:
+      _id:
+        type: string
+        format: string
+      actual_price:
+        type: string
+        format: string
+      average_rating:
+        type: string
+      brand:
+        type: string
+      category:
+        type: string
+      crawled_at:
+        type: string
+      description:
+        type: string
+      discount:
+        type: string
+      images:
+        type: array
+        items:
+          $ref: '#/definitions/Image'
+      out_of_stock:
+        type: boolean
+        format: boolean
+      pid:
+        type: string
+        format: string
+      product_details:
+        type: array
+        items:
+          $ref: '#/definitions/ProductDetail'
+      seller:
+        type: string
+      selling_price:
+        type: string
+      sub_category:
+        type: string
+      title:
+        type: string
+        format: string
+      url:
+        type: string
+  Image:
+    type: object
+    properties:
+      url:
+        type: string
+        format: string
+  ProductDetail:
+    type: object
+    properties:
+      style_code:
+        type: string
+      closure:
+        type: string
+      pockets:
+        type: string
+      fabric:
+        type: string
+      pattern:
+        type: string
+      color:
+        type: string

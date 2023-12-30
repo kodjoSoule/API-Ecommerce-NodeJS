@@ -1,0 +1,18 @@
+paths:
+  /api/fashionProducts:
+    get:
+      summary: Get all fashion products.
+      responses:
+        '200':
+          description: Success. List of fashion products retrieved.
+          content:
+            application/json:
+              example:
+                - title: "Product 1"
+                  category: "Clothing"
+                  brand: "Brand 1"
+                  price: 49.99
+                - title: "Product 2"
+                  category: "Footwear"
+                  brand: "Brand 2"
+                  price: 29.99
