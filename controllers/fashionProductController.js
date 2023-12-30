@@ -39,16 +39,16 @@ const getTest = async (req, res) => {
 };
 
 //
-// Récupérer tous les produits
-const getAllFashionProducts = async (req, res) => {
-	try {
-		const products = await FashionProduct.find({});
-		res.json(products);
-	} catch (error) {
-		console.error("Error fetching fashion products:", error);
-		res.status(500).send("Internal Server Error");
-	}
-};
+// // Récupérer tous les produits
+// const getAllFashionProducts = async (req, res) => {
+// 	try {
+// 		const products = await FashionProduct.find({});
+// 		res.json(products);
+// 	} catch (error) {
+// 		console.error("Error fetching fashion products:", error);
+// 		res.status(500).send("Internal Server Error");
+// 	}
+// };
 
 // Récupérer un produit par son ID
 const getFashionProductById = async (req, res) => {
@@ -124,9 +124,74 @@ const deleteFashionProductById = async (req, res) => {
 	}
 };
 
-//
+//liste des requêtes d'interrogation simples et analytiques qui seront proposées dans l'API ;
+
+// // Récupérer tous les produits d'une catégorie spécifique
+// const getProductsByCategory = async (req, res) => {
+// 	const category = req.params.category;
+
+// 	try {
+// 		const products = await FashionProduct.find({ category });
+// 		res.json(products);
+// 	} catch (error) {
+// 		console.error("Error fetching fashion products by category:", error);
+// 		res.status(500).send("Internal Server Error");
+// 	}
+// };
+
+// // Récupérer tous les produits d'une marque spécifique
+// const getProductsByBrand = async (req, res) => {
+// 	const brand = req.params.brand;
+
+// 	try {
+// 		const products = await FashionProduct.find({ brand });
+// 		res.json(products);
+// 	} catch (error) {
+// 		console.error("Error fetching fashion products by brand:", error);
+// 		res.status(500).send("Internal Server Error");
+// 	}
+// };
+
+// // Récupérer tous les produits en promotion
+// const getProductsOnSale = async (req, res) => {
+// 	try {
+// 		const products = await FashionProduct.find({ discount: { $ne: null } });
+// 		res.json(products);
+// 	} catch (error) {
+// 		console.error("Error fetching on-sale fashion products:", error);
+// 		res.status(500).send("Internal Server Error");
+// 	}
+// };
+
+// // Calculer la moyenne des évaluations pour une catégorie donnée
+// const getAverageRatingByCategory = async (req, res) => {
+// 	const category = req.params.category;
+
+// 	try {
+// 		const averageRating = await FashionProduct.aggregate([
+// 			{ $match: { category } },
+// 			{ $group: { _id: null, avgRating: { $avg: "$average_rating" } } },
+// 		]);
+
+// 		if (averageRating.length === 0) {
+// 			return res
+// 				.status(404)
+// 				.json({ message: "No products found for the specified category" });
+// 		}
+
+// 		res.json({ averageRating: averageRating[0].avgRating });
+// 	} catch (error) {
+// 		console.error("Error calculating average rating by category:", error);
+// 		res.status(500).send("Internal Server Error");
+// 	}
+// };
 module.exports = {
 	getAllFashionProducts,
 	getFirstFashionProduct,
 	getTest,
+	getFashionProductById,
+	addFashionProduct,
+	updateFashionProductById,
+	deleteFashionProductById,
+	// Ajoutez d'autres méthodes au besoin
 };
