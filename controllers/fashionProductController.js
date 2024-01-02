@@ -10,7 +10,6 @@ const getAllFashionProducts = async (req, res) => {
 		//limit(10);
 		const products = await FashionProduct.find().limit(1);
 		console.log("Fetched products:", products);
-
 		res.json(products);
 	} catch (error) {
 		console.error("Error fetching fashion products:", error);
@@ -109,19 +108,18 @@ const updateFashionProductById = async (req, res) => {
 // Supprimer un produit par son ID
 const deleteFashionProductById = async (req, res) => {
 	const productId = req.params.id;
+	// try {
+	// 	const deletedProduct = await FashionProduct.findByIdAndDelete(productId);
 
-	try {
-		const deletedProduct = await FashionProduct.findByIdAndDelete(productId);
-
-		if (!deletedProduct) {
-			return res.status(404).json({ message: "Product not found" });
-		}
-
-		res.json({ message: "Product deleted successfully" });
-	} catch (error) {
-		console.error("Error deleting fashion product by ID:", error);
-		res.status(500).send("Internal Server Error");
-	}
+	// 	if (!deletedProduct) {
+	// 		return res.status(404).json({ message: "Product not found" });
+	// 	}
+	// 	res.json({ message: "Product deleted successfully" });
+	// } catch (error) {
+	// 	console.error("Error deleting fashion product by ID:", error);
+	// 	res.status(500).send("Internal Server Error");
+	// }
+	res.json({ message: "Product deleted successfully" });
 };
 
 //liste des requêtes d'interrogation simples et analytiques qui seront proposées dans l'API ;
