@@ -15,40 +15,55 @@ router.post("/login", userController.loginUser);
 //router.post("/logout", userController.logout);
 //router.post("/token", userController.refreshToken);
 
-// Routes CRUD
+// Routes CRUD✅
 router.get("/products", fashionProductController.getAllFashionProducts);
 router.get("/products/:id", fashionProductController.getFashionProductById);
 router.post("/products/", fashionProductController.addFashionProduct);
 router.put("/products/:id", fashionProductController.updateFashionProductById);
 router.delete(
-	"products/:id",
+	"/products/:id",
 	fashionProductController.deleteFashionProductById
 );
 
 // Routes d'interrogation simples
+//Catégories✅
+router.get("/categories", fashionProductQueryController.getCategories);
 router.get(
-	"/category/:category",
+	"/categories/:category",
 	fashionProductQueryController.getProductsByCategory
 );
 
-router.get("/brand/:brand", fashionProductQueryController.getProductsByBrand);
-
+// brand✅
+router.get("/brands", fashionProductQueryController.getBrands);
+router.get("/brands/:brand", fashionProductQueryController.getProductsByBrand);
+// onSale✅
 router.get("/onSale", fashionProductQueryController.getProductsOnSale);
 
 // Routes d'interrogation analytiques
+//✅
 router.get(
 	"/category/:category/averageRating",
 	fashionProductAnalyticsController.getAverageRatingByCategory
 );
+//✅
 router.get(
 	"/bestRated",
 	fashionProductAnalyticsController.getBestRatedProducts
 );
+//nombre de produit par category
+//✅
+router.get(
+	"/category/:category/count",
+	fashionProductAnalyticsController.getProductCountByCategory
+);
+//✅
 router.get("/count", fashionProductAnalyticsController.getProductCount);
+//To be deleted
 router.get(
 	"/sortedByDiscount",
 	fashionProductAnalyticsController.getProductsSortedByDiscount
 );
+//To be deleted
 router.get(
 	"/discountGreaterThan/:percentage",
 	fashionProductAnalyticsController.getProductsDiscountGreaterThan

@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpecs = require("./config/swaggerSpecs");
 const app = express();
-
+const morgan = require("morgan");
 const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./config/swagger.yaml");
 const bodyParser = require("body-parser");
@@ -35,7 +35,8 @@ const bodyParser = require("body-parser");
 // app.use(cors());
 
 // utilisation de la fonction middleware
-app.use(LoggerMiddleware);
+//app.use(LoggerMiddleware);
+app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));

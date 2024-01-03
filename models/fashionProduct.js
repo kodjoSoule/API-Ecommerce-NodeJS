@@ -15,8 +15,13 @@ const productDetailSchema = new mongoose.Schema({
 
 const fashionProductSchema = new mongoose.Schema(
 	{
-		_id: { type: String, required: true },
-		actual_price: { type: String, required: true },
+		//_id: mongoose.Schema.Types.ObjectId,
+		//_id: { type: String, required: true, unique: true }, ok
+		_id: {
+			type: String,
+			default: () => new mongoose.Types.ObjectId().toString(),
+		},
+		actual_price: { type: String },
 		average_rating: String,
 		brand: String,
 		category: String,
@@ -26,14 +31,14 @@ const fashionProductSchema = new mongoose.Schema(
 
 		images: { imageSchema },
 		out_of_stock: { type: Boolean, default: false },
-		pid: { type: String, required: true },
+		pid: { type: String },
 
 		product_details: [productDetailSchema],
 
 		seller: String,
 		selling_price: String,
 		sub_category: String,
-		title: { type: String, required: true },
+		title: { type: String },
 		url: String,
 	},
 	{ collection: "fashionProducts" }
