@@ -1,34 +1,25 @@
 const FashionProduct = require("../models/fashionProduct");
 
-
-
 const getAllFashionProducts = async (req, res) => {
 	try {
-		console.log("Fetching all fashion products...");
-
-		//const products = await FashionProduct.find();
-		//limit(10);
+		console.log("Recuperation - fashion products...");
 		const products = await FashionProduct.find();
-		//console.log("Fetched products:", products);
 		res.json(products);
 	} catch (error) {
-		console.error("Error fetching fashion products:", error);
+		console.error("Error Recuperation fashion products:", error);
 		res.status(500).send("Internal Server Error");
 	}
 };
-
 
 const getFirstFashionProduct = async (req, res) => {
 	try {
 		const product = await FashionProduct.findOne();
 		res.json(product);
-		
 	} catch (error) {
 		console.error(error);
 		res.status(500).send("Internal Server Error");
 	}
 };
-
 
 const getFashionProductById = async (req, res) => {
 	const productId = req.params.id;
@@ -42,11 +33,10 @@ const getFashionProductById = async (req, res) => {
 
 		res.json(product);
 	} catch (error) {
-		console.error("Error fetching fashion product by ID:", error);
+		console.error("Error Recuperation fashion product by ID:", error);
 		res.status(500).send("Internal Server Error");
 	}
 };
-
 
 const addFashionProduct = async (req, res) => {
 	const newProductData = req.body;
@@ -57,11 +47,10 @@ const addFashionProduct = async (req, res) => {
 
 		res.status(201).json(newProduct);
 	} catch (error) {
-		console.error("Error adding fashion product:", error);
+		console.error("Error ajout fashion product:", error);
 		res.status(500).send("Internal Server Error");
 	}
 };
-
 
 const updateFashionProductById = async (req, res) => {
 	const productId = req.params.id;
@@ -84,7 +73,6 @@ const updateFashionProductById = async (req, res) => {
 		res.status(500).send("Internal Server Error");
 	}
 };
-
 
 const deleteFashionProductById = async (req, res) => {
 	const productId = req.params.id;
@@ -110,5 +98,4 @@ module.exports = {
 	addFashionProduct,
 	updateFashionProductById,
 	deleteFashionProductById,
-	
 };
