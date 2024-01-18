@@ -3,7 +3,9 @@ const connectDB = require("./config/database");
 const cors = require("cors");
 
 const fashionProductRoutes = require("./routes/fashionProductRoutes");
+
 const PORT = process.env.PORT || 3000;
+
 const swaggerUi = require("swagger-ui-express");
 const app = express();
 const morgan = require("morgan");
