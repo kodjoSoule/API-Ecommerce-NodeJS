@@ -1,6 +1,6 @@
 const FashionProduct = require("../models/fashionProduct");
 
-// Example controller to get all fashion products
+
 
 const getAllFashionProducts = async (req, res) => {
 	try {
@@ -17,19 +17,19 @@ const getAllFashionProducts = async (req, res) => {
 	}
 };
 
-//find the first product
+
 const getFirstFashionProduct = async (req, res) => {
 	try {
 		const product = await FashionProduct.findOne();
 		res.json(product);
-		//res.json({ message: "Products" });
+		
 	} catch (error) {
 		console.error(error);
 		res.status(500).send("Internal Server Error");
 	}
 };
 
-// Récupérer un produit par son ID
+
 const getFashionProductById = async (req, res) => {
 	const productId = req.params.id;
 
@@ -47,7 +47,7 @@ const getFashionProductById = async (req, res) => {
 	}
 };
 
-// Ajouter un nouveau produit
+
 const addFashionProduct = async (req, res) => {
 	const newProductData = req.body;
 
@@ -62,7 +62,7 @@ const addFashionProduct = async (req, res) => {
 	}
 };
 
-// Mettre à jour un produit par son ID
+
 const updateFashionProductById = async (req, res) => {
 	const productId = req.params.id;
 	const updatedProductData = req.body;
@@ -85,7 +85,7 @@ const updateFashionProductById = async (req, res) => {
 	}
 };
 
-// Supprimer un produit par son ID
+
 const deleteFashionProductById = async (req, res) => {
 	const productId = req.params.id;
 
@@ -102,7 +102,6 @@ const deleteFashionProductById = async (req, res) => {
 		res.status(500).send("Internal Server Error");
 	}
 };
-
 module.exports = {
 	getAllFashionProducts,
 	getFirstFashionProduct,
@@ -111,5 +110,5 @@ module.exports = {
 	addFashionProduct,
 	updateFashionProductById,
 	deleteFashionProductById,
-	// Ajoutez d'autres méthodes au besoin
+	
 };

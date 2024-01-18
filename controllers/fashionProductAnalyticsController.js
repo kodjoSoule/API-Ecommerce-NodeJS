@@ -142,45 +142,10 @@ const getProductCountByCategory = async (req, res) => {
 		res.status(500).send("Erreur interne du serveur");
 	}
 };
-// Récupérer les produits triés par ordre de réduction
-const getProductsSortedByDiscount = async (req, res) => {
-	try {
-		const products = await FashionProduct.find({
-			discount: { $ne: null },
-		}).sort({ discount: -1 });
-		res.json(products);
-	} catch (error) {
-		console.error(
-			"Erreur lors de la récupération des produits de mode triés par réduction :",
-			error
-		);
-		res.status(500).send("Erreur interne du serveur");
-	}
-};
-
-// Récupérer les produits avec une réduction supérieure à un certain pourcentage
-const getProductsDiscountGreaterThan = async (req, res) => {
-	const percentage = parseFloat(req.params.percentage);
-
-	try {
-		const products = await FashionProduct.find({
-			discount: { $gt: percentage },
-		});
-		res.json(products);
-	} catch (error) {
-		console.error(
-			"Error fetching fashion products with discount greater than specified percentage:",
-			error
-		);
-		res.status(500).send("Erreur interne du serveur");
-	}
-};
 
 module.exports = {
 	getProductCountByCategory,
 	getAverageRatingByCategory,
 	getBestRatedProducts,
 	getProductCount,
-	getProductsSortedByDiscount,
-	getProductsDiscountGreaterThan,
 };
