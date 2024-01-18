@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ extended: false }));
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 connectDB();
 
 app.use("/api/v1/", fashionProductRoutes);

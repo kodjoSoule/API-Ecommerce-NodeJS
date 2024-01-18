@@ -11,7 +11,6 @@ const registerUser = async (req, res) => {
 			return res.status(400).json({ message: "Cet utilisateur existe déjà" });
 		}
 
-		//
 		const newUser = new User({ username, password });
 
 		const savedUser = await newUser.save();

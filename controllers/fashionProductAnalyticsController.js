@@ -1,28 +1,5 @@
 const FashionProduct = require("../models/fashionProduct");
 
-// // Calculer la moyenne des évaluations pour une catégorie donnée
-// const getAverageRatingByCategory = async (req, res) => {
-// 	const category = req.params.category;
-
-// 	try {
-// 		const averageRating = await FashionProduct.aggregate([
-// 			{ $match: { category: category } },
-// 			{ $group: { _id: null, avgRating: { $avg: "$average_rating" } } },
-// 		]);
-
-// 		if (averageRating.length === 0) {
-// 			return res
-// 				.status(404)
-// 				.json({ message: "No products found for the specified category" });
-// 		}
-
-// 		res.json({ averageRating: averageRating[0].avgRating });
-// 	} catch (error) {
-// 		console.error("Error calculating average rating by category:", error);
-// 		res.status(500).send("Erreur interne du serveur");
-// 	}
-// };
-
 // Calculer la moyenne des évaluations pour une catégorie donnée
 const getAverageRatingByCategory2 = async (req, res) => {
 	const category = req.params.category;
@@ -31,8 +8,6 @@ const getAverageRatingByCategory2 = async (req, res) => {
 		const averageRatingResult = await FashionProduct.aggregate([
 			{ $match: { category: category, average_rating: { $exists: true } } },
 			{ $group: { _id: null, "Total ": { $sum: 1 } } },
-			//{ $match: { average_rating: { $exists: true } } }, // Assurez-vous que 'average_rating' existe
-			// { $group: { _id: null, avgRating: { $avg: "$average_rating" } } },
 		]);
 
 		if (averageRatingResult.length === 0) {
@@ -41,8 +16,6 @@ const getAverageRatingByCategory2 = async (req, res) => {
 				.json({ message: "Aucun produit trouvé pour la catégorie spécifiée" });
 		}
 
-		// const averageRating = averageRatingResult[0].avgRating;
-		//res.json({ averageRating });
 		res.json(averageRatingResult);
 	} catch (error) {
 		console.error(
@@ -60,19 +33,19 @@ const getAverageRatingByCategory = async (req, res) => {
 			{
 				$match: {
 					category: category,
-					average_rating: { $exists: true, $ne: "" }, // Exclure les valeurs vides
+					average_rating: { $exists: true, $ne: "" },
 				},
 			},
 			{
 				$group: {
 					_id: null,
 					totalProducts: { $sum: 1 },
-					avgRating: { $avg: { $toDouble: "$average_rating" } }, // Convertir en nombre
+					avgRating: { $avg: { $toDouble: "$average_rating" } },
 				},
 			},
 			{
 				$project: {
-					_id: 0, // Ne pas inclure l'ID dans les résultats
+					_id: 0,
 					totalProducts: 1,
 					avgRating: 1,
 				},

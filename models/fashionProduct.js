@@ -15,8 +15,6 @@ const productDetailSchema = new mongoose.Schema({
 
 const fashionProductSchema = new mongoose.Schema(
 	{
-		//_id: mongoose.Schema.Types.ObjectId,
-		//_id: { type: String, required: true, unique: true }, ok
 		_id: {
 			type: String,
 			default: () => new mongoose.Types.ObjectId().toString(),
