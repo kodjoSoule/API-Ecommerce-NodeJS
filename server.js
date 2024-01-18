@@ -13,7 +13,6 @@ const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./config/swagger.yaml");
 const bodyParser = require("body-parser");
 
-// Utiliser le middleware CORS
 app.use(cors());
 app.use(morgan("common"));
 app.use(bodyParser.json());
